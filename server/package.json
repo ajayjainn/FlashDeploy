@@ -1,0 +1,25 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "description": "",
+  "dependencies": {
+    "@aws-sdk/client-ecs": "^3.791.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-http-proxy": "^2.1.1",
+    "http-proxy": "^1.18.1",
+    "nodemon": "^3.1.9",
+    "passport-github": "^1.1.0",
+    "unique-slug": "^5.0.0"
+  }
+}
