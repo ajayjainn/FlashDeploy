@@ -20,6 +20,7 @@ const s3Client = new S3Client({
 const repoUrl = process.env.REPO_URL;
 const projectId = process.env.PROJECT_ID;
 const projectSlug = process.env.PROJECT_SLUG;
+const accessToken = process.env.GITHUB_TOKEN;
 
 // Helper function to execute a command and return a promise
 function executeCommand(command, args, options = {}) {
@@ -59,8 +60,22 @@ async function main() {
   const outDir = path.resolve(__dirname, 'output');
 
   try {
-    // Sequential execution of commands
+    // Set up Git credentials temporarily for private repos
+    await executeCommand('git', ['config', '--global', 'credential.helper', 'store']);
+    
+    // Create credentials file with token
+    const homeDir = process.env.HOME || process.env.USERPROFILE;
+    const credentialsPath = path.join(homeDir, '.git-credentials');
+    const gitHubDomain = new URL(repoUrl).hostname;
+    fs.writeFileSync(credentialsPath, `https://${accessToken}:x-oauth-basic@${gitHubDomain}\n`);
+    
+    // Clone as normal
     await executeCommand('git', ['clone', repoUrl, outDir]);
+    
+    // Clean up credentials after use (optional, for security)
+    fs.unlinkSync(credentialsPath);
+    await executeCommand('git', ['config', '--global', '--unset', 'credential.helper']);
+    
     await executeCommand('npm', ['install'], {cwd: outDir});
     await executeCommand('npm', ['run', 'build'], {cwd: outDir});
     
@@ -106,9 +121,20 @@ async function main() {
 
     await Promise.all(uploadPromises);
     console.log('Build upload completed successfully');
+    process.exit(0);
   } catch (error) {
     console.error('Error:', error);
     process.exit(1);
+  } finally {
+    // Always clean up credentials
+    try {
+      if (fs.existsSync(credentialsPath)) {
+        fs.unlinkSync(credentialsPath);
+      }
+      await executeCommand('git', ['config', '--global', '--unset', 'credential.helper']);
+    } catch (cleanupError) {
+      console.error('Error during credential cleanup:', cleanupError);
+    }
   }
 }
 
