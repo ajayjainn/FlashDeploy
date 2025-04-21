@@ -18,7 +18,7 @@ const app = express();
 
 const bucketName = process.env.AWS_BUCKET_NAME;
 const AWS_REGION = process.env.AWS_REGION;
-app.use(express.static('dist'))
+
 
 // CORS configuration for development and production
 app.use(cors({
@@ -44,6 +44,45 @@ app.use(optionalJWT);
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ MongoDB connected'))
   .catch(err => console.error('❌ MongoDB connection error:', err));
+
+
+const staticMiddleware = express.static(path.join(__dirname, 'dist'), {
+  index: false,
+});
+
+function subdomainCount(host = '') {
+  return host.split('.').length - 2;
+}
+
+app.use((req, res, next) => {
+  const host = req.headers.host || '';
+  const isRootApp = (
+    process.env.NODE_ENV !== 'production' ||
+    subdomainCount(host) === 1
+  );
+
+  if (isRootApp) {
+    return staticMiddleware(req, res, next);
+  }
+  next();
+});
+
+app.get(
+  ['/', '/login', '/callback', '/dashboard', '/dashboard/*'],
+  (req, res, next) => {
+    const host = req.headers.host || '';
+    const isRootApp = (
+      process.env.NODE_ENV !== 'production' ||
+      subdomainCount(host) === 1
+    );
+    if (isRootApp) {
+      return res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    }
+    next();
+  }
+);
+
+
 
 // Routes
 app.use('/api/deploy', awsRouter);
