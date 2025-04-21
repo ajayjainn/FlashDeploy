@@ -58,7 +58,8 @@ app.get(['/callback', '/login', '/dashboard', '/dashboard/*', '/'], (req, res, n
     const host = req.headers.host;
     // Count the number of subdomains (e.g. app.example.com has 1, sub.app.example.com has 2)
     const subdomainCount = host.split('.').length-2; 
-
+    console.log(host.split('.'));
+    console.log(subdomainCount);
     if (subdomainCount === 1) {
       return res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
     } else {
