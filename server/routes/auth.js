@@ -41,6 +41,7 @@ passport.use(new GitHubStrategy({
     } else {
       // Create new user
       user = await User.create({
+        id: profile.id,
         githubId: profile.id,
         displayName: profile.displayName,
         username: profile.username,
