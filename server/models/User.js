@@ -14,8 +14,11 @@ const UserSchema = new mongoose.Schema({
 });
 UserSchema.set('toJSON', {
   virtuals: true,
-  versionKey:false,
-  transform: function (doc, ret) {   delete ret._id  }
+  versionKey: false,
+  transform: function (doc, ret) { 
+    // Keeping the auto-generated _id field
+    delete ret._id;
+  }
 });
 
 export default mongoose.model('User', UserSchema);
