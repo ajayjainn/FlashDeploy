@@ -84,7 +84,7 @@ const LoginPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Deploy Flow
+            Flash Deploy
           </motion.h1>
           <motion.p 
             className="mt-2 text-gray-400"

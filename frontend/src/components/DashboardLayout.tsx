@@ -70,7 +70,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
                   <GitBranch size={18} />
                 </div>
-                <span className="font-semibold">Deploy Flow</span>
+                <span className="font-semibold">Flash Deploy</span>
               </Link>
               <SidebarTrigger />
             </div>

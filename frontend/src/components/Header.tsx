@@ -14,7 +14,7 @@ export default function Header() {
           onClick={() => navigate('/')} 
           className="flex items-center space-x-3 cursor-pointer group"
         >
-          <span className="text-xl font-bold tracking-tight">Deploy Flow</span>
+          <span className="text-xl font-bold tracking-tight">Flash Deploy</span>
         </div>
 
         {/* Navigation */}

@@ -68,7 +68,7 @@ export default function Landing() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.8 }}
         >
-          Deploy your web projects with Deploy Flow. Experience seamless deployment, instant previews, and simplified
+          Deploy your web projects with Flash Deploy. Experience seamless deployment, instant previews, and simplified
           workflow.
         </motion.p>
         <motion.div
@@ -282,7 +282,7 @@ export default function Landing() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Join developers who deploy their projects with Deploy Flow.
+          Join developers who deploy their projects with Flash Deploy.
         </motion.p>
         <motion.div
           initial={{ y: 50, opacity: 0 }}
