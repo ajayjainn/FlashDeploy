@@ -67,7 +67,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="h-[calc(100vh-73px)] flex items-center justify-center bg-gradient-to-b from-gray-900 to-black text-white overflow-hidden">
+    <div className="h-[calc(100vh-73px)] flex items-center justify-center ">
       <motion.div 
         className="w-full max-w-md px-4"
         variants={containerVariants}
@@ -84,7 +84,7 @@ const LoginPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Mini-Vercel
+            Deploy Flow
           </motion.h1>
           <motion.p 
             className="mt-2 text-gray-400"

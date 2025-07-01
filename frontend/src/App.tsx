@@ -28,7 +28,7 @@ const DashboardContainer = () => {
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider defaultTheme="light" storageKey="deploy-flow-theme">
+    <ThemeProvider defaultTheme="dark" storageKey="deploy-flow-theme">
       <Router>
         <AuthProvider>
           <Toaster />

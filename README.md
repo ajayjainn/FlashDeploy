@@ -4,6 +4,12 @@ A lightweight, Vercel‑inspired platform for one‑click frontend deployments f
 
 ---
 
+## 🎥 Demo
+
+![FlashDeploy Demo](server/dist/demo.gif)
+
+---
+
 ## Features
 
 - **One‑click deployments** for React/Vite projects  
